@@ -47,7 +47,7 @@ def _import_module(path: str) -> ModuleType:
     definition exist in sys.modules under that name.
     """
     try:
-        if os.path.exists(path):
+        if os.path.exists(path) and os.path.isfile(path):
             name = uuid4().hex
             spec = spec_from_file_location(name, path, submodule_search_locations=[])
             assert spec is not None, f"spec_from_file_location failed for {path}"
